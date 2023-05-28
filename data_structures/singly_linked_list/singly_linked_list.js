@@ -16,14 +16,12 @@ class SinglyLinkedList {
         if (this.head == null) {
             this.head = newNode
             this.tail = this.head
-        } else if (this.tail == null) {
-            this.tail = newNode
-            this.head.next = newNode
-        } else {
+        }else {
             this.tail.next = newNode
             this.tail = newNode
         }
         this.length++
+        return this
     }
     pop() {
         if (this.length === 0) return undefined
