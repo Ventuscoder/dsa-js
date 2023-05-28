@@ -117,6 +117,21 @@ class DoublyLinkedList {
         nodeToRemove.prev = null
         return nodeToRemove
     }
+    reverse(){
+        const newList = new DoublyLinkedList()
+        let currentNode
+        for (let i = 0; i < this.length; i++) {
+            if (i === 0) {
+                currentNode = this.tail
+            } else {
+                currentNode = currentNode.prev
+            }
+            newList.push(currentNode.val)
+        }
+        this.head = newList.head
+        this.tail = newList.tail
+        return this
+    }
 }
 
 const list = new DoublyLinkedList()
@@ -124,4 +139,6 @@ list.push(2)
 list.push(3)
 list.push(5)
 list.remove(1)
-console.log(list.get(1))
+list.push(7)
+list.push(11)
+console.log(list.reverse())
