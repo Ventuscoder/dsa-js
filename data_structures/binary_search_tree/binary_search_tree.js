@@ -51,8 +51,55 @@ class BinarySearchTree {
         if (!found) return false
         return true
     }
+    breadthFirstSearch() {
+        const data = [], queue = []
+        let node = this.root
+        queue.push(node)
+        while (queue.length) {
+            node = queue.shift()
+            data.push(node.val)
+            if(node.left) queue.push(node.left)
+            if(node.right) queue.push(node.right)
+        }
+        return data
+    }
+    dfsPreOrder(node = this.root) {
+        let values = []
+        values.push(node.val)
+        if (node.left) {
+            values = values.concat(this.dfsPreOrder(node.left))
+        }
+        if (node.right) {
+            values = values.concat(this.dfsPreOrder(node.right))
+        }
+        return values
+    }
+    dfsPostOrder(node = this.root) {
+        let values = []
+        if (node.left) {
+            values = values.concat(this.dfsPostOrder(node.left))
+        }
+        if (node.right) {
+            values = values.concat(this.dfsPostOrder(node.right))
+        }
+        values.push(node.val)
+        return values
+    }
+    dfsInOrder(node = this.root) {
+        let values = []
+        if (node.left) {
+            values = values.concat(this.dfsInOrder(node.left))
+        }
+        values.push(node.val)
+        if (node.right) {
+            values = values.concat(this.dfsInOrder(node.right))
+        }
+        return values
+    }
 }
 
 const tree = new BinarySearchTree()
-tree.insert(10).insert(7).insert(12).insert(13).insert(5)
-console.log(tree.find(7))
+tree.insert(10).insert(6).insert(15).insert(3).insert(8).insert(20)
+console.log('Pre Order: ', tree.dfsPreOrder())
+console.log('Post Order: ', tree.dfsPostOrder())
+console.log('In order: ', tree.dfsInOrder())
